@@ -1,11 +1,27 @@
 import React from 'react'
 
-import './BoardBar.scss'
+import './Column.scss'
 
-function BoardBar() {
+import Card from './../Card/Card'
+function Column() {
     return (
-        <nav className="navbar-board">Board Bar</nav>
+        <div className="column">
+            <header>Brainstorm</header>
+            <ul className="card-list">
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                {/* <li className="card-item">Add what you'd like to work on beloww </li>
+                <li className="card-item">Add what you'd like to work on beloww </li>
+                <li className="card-item">Add what you'd like to work on beloww </li>
+                <li className="card-item" >Add what you'd like to work on beloww </li> */}
+            </ul>
+            <footer>Add another</footer>
+
+        </div>
     )
 }
 
-export default AppBar
+export default Column
