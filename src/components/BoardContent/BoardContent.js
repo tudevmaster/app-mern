@@ -31,7 +31,7 @@ function BoardContent() {
           <header>Brainstorm</header>
           <ul>
             <Column/>
-            <li>Add what you'd like to work on beloww </li>
+            <li>Add what you'd like to work on beloww 123 </li>
             <li>Add what you'd like to work on beloww </li>
             <li>Add what you'd like to work on beloww </li>
             <li>Add what you'd like to work on beloww </li>
