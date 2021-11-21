@@ -1,47 +1,53 @@
-import React, { useState, useEffect} from 'react'
-
+import React, { useState, useEffect } from 'react'
+import { Container, Draggable } from 'react-smooth-dnd'
+import { isEmpty } from 'lodash'
 import './BoardContent.scss'
 
 
-import {initialData} from './../../actions/initialData'
+import { initialData } from './../../actions/initialData'
 
 import Column from './../Column/Column'
+import { mapOrder } from '../../utilities/sorts'
 import Task from './../Task/Task'
 function BoardContent() {
-  const [board, setBoard]= useState({})
-  const [columns, setColumns ]= useState({})
-  useEffect(()=>{
-    const boardFromDB = initialData
+  const [board, setBoard] = useState({})
+  const [columns, setColumns] = useState([])
+  useEffect(() => {
+    const boardFromDB = initialData.boards.find(board => board.id === 'board-1')
+    if (boardFromDB) {
+      setBoard(boardFromDB)
+
+      setColumns(mapOrder(boardFromDB.columns, boardFromDB.columnOrder, 'id')) //tra ve 3 colum ben initalData
+    }
   }, [])
-    return (
-        <div className="board-content">
-        <div className="column">
-          <header>Brainstorm</header>
-          <ul>
-            <Column/>
-            <Task/>
-            <Task/>
-            <Task/>
-            <Task/>
-          </ul>
-          <footer>Add another</footer>
+  if (isEmpty(board)) {
+    return <div className="not-found" style={{ 'padding': '10px', 'color': 'white' }}>Board not-found</div>
+  }
 
-        </div>
-        <div className="column">
-          <header>Brainstorm</header>
-          <ul>
-            <Column/>
-            <li>Add what you'd like to work on beloww 123 </li>
-            <li>Add what you'd like to work on beloww </li>
-            <li>Add what you'd like to work on beloww </li>
-            <li>Add what you'd like to work on beloww </li>
-          </ul>
-          <footer>Add another</footer>
+  const onColumnDrop = (dropResult) => {
+    console.log(dropResult)
 
-        </div>
-     
-      </div >
-    )
+  }
+  return (
+    <div className="board-content">
+      <Container
+        orientation="horizontal"
+        onDrop={onColumnDrop}
+        // dragHandleSelector=".column-drag-handle"
+        dropPlaceholder={{
+          animationDuration: 150,
+          showOnTop: true,
+          className: 'cards-drop-preview'
+        }}
+      >
+        {columns.map((column, index) => (
+          <Draggable key={index}>
+            <Column column={column} tuan ="3" />
+          </Draggable>
+        ))}
+      </Container>
+    </div >
+  )
 }
 
-export default BoardContent;
+export default BoardContent

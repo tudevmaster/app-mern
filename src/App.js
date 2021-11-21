@@ -5,6 +5,7 @@ import './App.scss'
 import AppBar from './components/AppBar/AppBar'
 import BoardBar from './components/BoardBar/BoardBar'
 import BoardContent from './components/BoardContent/BoardContent'
+import Column from './components/Column/Column'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <AppBar/>
       <BoardBar/>
       <BoardContent/>
+      <Column/>
     </div >
   )
 }
